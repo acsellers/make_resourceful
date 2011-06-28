@@ -83,7 +83,8 @@ module Resourceful
                     :nested_object_path, :nested_object_url,
                     :current_objects, :current_object, :current_model, :current_model_name,
                     :namespaces, :instance_variable_name, :parent_names, :parent_name,
-                    :parent?, :parent_model, :parent_object, :save_succeeded?)
+                    :parent?, :parent_model, :parent_object, :save_succeeded?, :save_allowed?,
+                   :save_forbid, :save_allow)
     end
   end
 end

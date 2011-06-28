@@ -397,6 +397,29 @@ module Resourceful
       def plural?
         !singular?
       end
+
+      #Returns whether the save is allowed or disallowed, 
+      #by default all saves are allowed.
+      #
+      #Note that this is not from the hcatlin make_resourceful.
+      #
+      # TODO: Find out if there is a better way to do this
+      def save_allowed?
+        !@forbidden ||= false
+      end
+
+      #Sets the save as forbidden, which will block updates, creates and destroys,
+      #undo this with save_allow.
+      def save_forbid
+        @forbidden = true
+      end
+
+      #Sets the save as allowed, this is the same as the default option.
+      def save_allow
+        @forbidden = false
+      end
+
+
     end
   end
 end

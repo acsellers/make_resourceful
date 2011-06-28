@@ -35,7 +35,7 @@ module Resourceful
         build_object
         load_object
         before :create
-        if current_object.save
+        if save_allowed? and current_object.save
           save_succeeded!
           after :create
           response_for :create
@@ -50,9 +50,9 @@ module Resourceful
       def update
         #load_object
         before :update
-        
+       
         begin
-          result = current_object.update_attributes object_parameters
+          result = save_allowed? and current_object.update_attributes object_parameters
         rescue ActiveRecord::StaleObjectError
           current_object.reload
           result = false
@@ -88,7 +88,7 @@ module Resourceful
       def destroy
         #load_object
         before :destroy
-        if current_object.destroy
+        if save_allowed? and current_object.destroy
           after :destroy
           response_for :destroy
         else
